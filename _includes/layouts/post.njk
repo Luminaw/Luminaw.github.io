@@ -1,0 +1,9 @@
+---
+layout: layouts/base.njk
+---
+
+<article class="post-content">
+	<h1>{{ title }}</h1>
+	<p class="post-meta">{{ page.date | date("MMMM d, yyyy") }}</p>
+	{{ content | safe }}
+</article>

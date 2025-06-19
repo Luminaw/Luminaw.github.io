@@ -1,0 +1,16 @@
+---
+layout: layouts/base.njk
+title: Documentation
+---
+
+<h2>All Documentation</h2>
+<ul class="post-list">
+	{% for doc in collections.docs %}
+	<li class="post-list-item">
+		<h2>
+			<a href="{{ doc.url }}">{{ doc.data.title }}</a>
+		</h2>
+		<p>{{ doc.data.description }}</p>
+	</li>
+	{% endfor %}
+</ul>
