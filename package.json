@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "build": "pnpm exec eleventy",
-    "serve": "pnpm exec eleventy --serve --port 3088"
+    "serve": "pnpm exec eleventy --serve --port 3088",
+    "build-ghpages": "npx @11ty/eleventy --pathprefix=/Luminaw.github.io/"
   },
   "keywords": [],
   "author": "",
