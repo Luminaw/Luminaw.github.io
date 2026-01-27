@@ -7,6 +7,11 @@ import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
 import autoImport from 'astro-auto-import';
 
+import rehypeSlug from 'rehype-slug';
+import rehypeAutolinkHeadings from 'rehype-autolink-headings';
+import rehypeExternalLinks from 'rehype-external-links';
+import rehypePrettyCode from 'rehype-pretty-code';
+
 
 // https://astro.build/config
 export default defineConfig({
@@ -17,7 +22,41 @@ export default defineConfig({
       ],
     }),
     react(),
-    mdx(),
+    mdx({
+      syntaxHighlight: false,
+
+      gfm: true,
+      remarkRehype: { footnoteLabel: 'Footnotes' },
+      remarkPlugins: [],
+
+      rehypePlugins: [
+        rehypeSlug, // Adds IDs to headings
+        [
+          rehypeExternalLinks,
+          { target: '_blank', rel: ['noopener', 'noreferrer'] }
+        ],
+        [
+          rehypeAutolinkHeadings,
+          {
+            behavior: 'prepend', // Adds a link icon *after* the text
+            properties: { className: ['anchor-link'] }, // CSS class for the icon
+            content: { type: 'text', value: '# ' }, // The symbol to show
+          },
+        ],
+        [
+          rehypePrettyCode,
+          {
+            theme: 'catppuccin-mocha',
+            keepBackground: true,
+            onVisitLine(node) {
+              if (node.children.length === 0) {
+                node.children = [{ type: 'text', value: ' ' }];
+              }
+            },
+          }
+        ]
+      ],
+    }),
     sitemap()
   ],
 

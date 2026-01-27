@@ -2,6 +2,7 @@
 title: "Tool Usage"
 sidebarOrder: 2
 ---
+import Callout from "../../../components/mdx/Callout.astro";
 
 # Tool Usage
 
@@ -24,3 +25,49 @@ You can use custom components in your MDX files. For example, the `Callout` comp
 <Callout type="info" title="Pro Tip">
   Use the `mauve` text color for emphasizing important keywords in your docs.
 </Callout>
+
+| Header 1 | Header 2 | Header 3 |
+|----------|----------|----------|
+| Cell 1   | Cell 2   | Cell 3   |
+| Cell 4   | Cell 5   | Cell 6   |
+
+[this is a link](https://google.com)
+
+- [ ] this is a checkbox
+- [x] this is a checked checkbox
+
+# Heading 1
+## Heading 2
+### Heading 3
+#### Heading 4
+##### Heading 5
+###### Heading 6
+
+- item 1
+- item 2
+- item 3
+
+1. item 1
+2. item 2
+3. item 3
+
+```javascript
+function hello() {
+    console.log("hello world");
+}
+
+hello();
+```
+
+```rust /println/ title="src/main.rs"
+fn main() {
+    println!("hello world");
+}
+```
+
+> quoted by someone
+
+~~not this~~
+
+goto [google](https://google.com)
+or stay [here](/docs/luminaw/)
