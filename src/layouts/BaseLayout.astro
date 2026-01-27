@@ -6,11 +6,13 @@ import Footer from "../components/common/Footer.astro";
 interface Props {
     title?: string;
     description?: string;
+    container?: boolean;
 }
 
 const {
     title = "Luminaw | Portfolio & Blog",
     description = "A personal portfolio and blog showcasing my projects and thoughts.",
+    container = true,
 } = Astro.props;
 ---
 
@@ -33,7 +35,9 @@ const {
     </head>
     <body class="bg-base text-text min-h-screen flex flex-col">
         <Navbar />
-        <main class="flex-grow">
+        <main
+            class={`flex-grow ${container ? "container mx-auto px-4 py-8 max-w-5xl" : ""}`}
+        >
             <slot />
         </main>
         <Footer />

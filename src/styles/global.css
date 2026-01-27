@@ -135,6 +135,11 @@
 }
 
 /* Lists and Spacing */
+.prose ul,
+.prose ol {
+    padding-left: 1.5rem;
+}
+
 .prose ul>li::marker {
     color: var(--color-mauve);
 }
@@ -145,8 +150,13 @@
 }
 
 .prose li {
-    margin-top: 0.25em;
-    margin-bottom: 0.25em;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+/* GFM Fixes */
+.prose li>p {
+    margin: 0;
 }
 
 /* Blockquotes */
@@ -158,6 +168,7 @@
     border-left-width: 4px;
     position: relative;
     overflow: hidden;
+    margin: 2rem 0;
 }
 
 .prose blockquote p:first-of-type::before,
@@ -201,15 +212,14 @@
 
 .prose tr:hover td {
     background-color: var(--color-surface0);
-    opacity: 0.5;
     transition: background-color 0.2s;
 }
 
 /* Checkboxes (GFM) */
 .prose input[type="checkbox"] {
     appearance: none;
-    width: 1.2rem;
-    height: 1.2rem;
+    width: 1.1rem;
+    height: 1.1rem;
     border: 2px solid var(--color-surface1);
     border-radius: var(--radius-xs);
     background-color: var(--color-mantle);
@@ -232,7 +242,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     color: var(--color-base);
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     font-weight: 900;
 }
 
@@ -259,11 +269,16 @@
 
 /* Rehype Pretty Code Refinements */
 pre {
-    margin: 2rem 0 !important;
+    margin: 0 !important;
     border-radius: var(--radius-sm) !important;
     border: 1px solid var(--color-surface0) !important;
     background-color: var(--color-crust) !important;
     position: relative;
+}
+
+/* Wrap pre in a container for spacing and title alignment */
+figure[data-rehype-pretty-code-figure] {
+    margin: 2rem 0;
 }
 
 /* Code Block Title */
@@ -271,18 +286,22 @@ figcaption[data-rehype-pretty-code-title] {
     background-color: var(--color-mantle);
     border: 1px solid var(--color-surface0);
     border-bottom: none;
-    padding: 0.5rem 1rem;
-    font-size: 0.75rem;
+    padding: 0.35rem 1rem;
+    font-size: 0.7rem;
     font-weight: 700;
     color: var(--color-subtext1);
     font-family: 'JetBrains Mono', monospace;
     display: inline-block;
     border-top-left-radius: var(--radius-sm);
     border-top-right-radius: var(--radius-sm);
-    margin-bottom: -2rem;
-    /* Pull code block up */
     position: relative;
     z-index: 10;
+    margin-bottom: 0;
+}
+
+/* Connect title to code block */
+figcaption[data-rehype-pretty-code-title]+pre {
+    border-top-left-radius: 0 !important;
 }
 
 /* Line Highlighting */
@@ -301,25 +320,36 @@ figcaption[data-rehype-pretty-code-title] {
 /* Copy Button Styling */
 .copy-code-button {
     position: absolute;
-    top: 0.5rem;
+    top: 0.35rem;
     right: 0.5rem;
-    padding: 0.4rem;
-    background-color: var(--color-surface0);
+    padding: 0.25rem;
+    background-color: var(--color-surface1);
+    border: 1px solid var(--color-surface2);
     border-radius: var(--radius-xs);
-    color: var(--color-overlay0);
+    color: var(--color-subtext1);
     opacity: 0;
     transition: all 0.2s;
     cursor: pointer;
-    z-index: 20;
+    z-index: 30;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
+/* If title is present, move button to title bar area if possible, or just stay top-right */
 pre:hover .copy-code-button {
     opacity: 1;
 }
 
 .copy-code-button:hover {
-    background-color: var(--color-surface1);
-    color: var(--color-text);
+    background-color: var(--color-mauve);
+    color: var(--color-base);
+    border-color: var(--color-mauve);
+}
+
+.copy-code-button svg {
+    width: 14px;
+    height: 14px;
 }
 
 /* Strikethrough */
