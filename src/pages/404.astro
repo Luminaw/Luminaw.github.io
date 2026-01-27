@@ -1,0 +1,47 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="404 | Page Not Found">
+    <section
+        class="relative min-h-[60vh] flex flex-col items-center justify-center text-center overflow-hidden py-20"
+    >
+        <!-- Visual Blobs (Matching Homepage) -->
+        <div
+            class="absolute -top-24 -left-24 w-96 h-96 bg-mauve/10 rounded-full blur-3xl animate-pulse"
+        >
+        </div>
+        <div
+            class="absolute top-1/2 -right-24 w-64 h-64 bg-blue/10 rounded-full blur-3xl animate-bounce"
+            style="animation-duration: 10s;"
+        >
+        </div>
+
+        <div class="relative z-10 space-y-6 max-w-lg mx-auto">
+            <h1
+                class="text-9xl font-black tracking-tighter text-mauve drop-shadow-sm"
+            >
+                404
+            </h1>
+            <div class="space-y-4">
+                <h2 class="text-3xl font-bold tracking-tight text-text">
+                    You've found a glitch.
+                </h2>
+                <p class="text-subtext1 text-lg leading-relaxed">
+                    The page you're looking for doesn't exist or has been moved
+                    to another dimension.
+                </p>
+            </div>
+
+            <div class="pt-8">
+                <a
+                    href="/"
+                    class="inline-flex px-8 py-4 bg-mauve text-base font-black transition-all hover:scale-105 active:scale-95 shadow-lg shadow-mauve/20"
+                    style="border-radius: var(--radius-sm);"
+                >
+                    Return Home
+                </a>
+            </div>
+        </div>
+    </section>
+</BaseLayout>
