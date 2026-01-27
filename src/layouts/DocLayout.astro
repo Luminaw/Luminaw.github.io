@@ -26,13 +26,22 @@ const getDocLink = (id: string) => {
 ---
 
 <BaseLayout title={title}>
-    <div class="flex flex-col md:flex-row gap-12">
-        <aside class="w-full md:w-64 shrink-0 space-y-8">
+    <div
+        class="flex flex-col lg:flex-row gap-12 max-w-7xl mx-auto px-4 lg:px-8"
+    >
+        <aside class="w-full lg:w-64 shrink-0 space-y-8 py-8">
+            <a
+                href="/docs"
+                class="inline-flex items-center text-xs font-bold uppercase tracking-widest text-mauve hover:opacity-80 transition-opacity mb-2"
+            >
+                ← Back to Projects
+            </a>
+
             <div>
                 <h5
-                    class="text-xs font-bold uppercase tracking-widest text-overlay0 mb-4 px-2"
+                    class="text-[10px] font-black uppercase tracking-[0.2em] text-overlay0 mb-4 px-3 opacity-50"
                 >
-                    {projectRoot.charAt(0).toUpperCase() + projectRoot.slice(1)} Docs
+                    {projectRoot.charAt(0).toUpperCase() + projectRoot.slice(1)} Navigation
                 </h5>
                 <nav>
                     <ul class="space-y-1">
@@ -43,7 +52,7 @@ const getDocLink = (id: string) => {
                                         href={getDocLink(doc.id)}
                                         class={`block px-3 py-2 text-sm transition-all border-l-2 ${
                                             entry?.id === doc.id
-                                                ? "bg-mauve/5 text-mauve border-mauve font-bold"
+                                                ? "bg-mauve/10 text-mauve border-mauve font-bold"
                                                 : "text-subtext0 border-transparent hover:text-text hover:border-surface1"
                                         }`}
                                     >
@@ -55,17 +64,10 @@ const getDocLink = (id: string) => {
                     </ul>
                 </nav>
             </div>
-
-            <a
-                href="/docs"
-                class="inline-flex items-center text-xs font-medium text-overlay0 hover:text-mauve transition-colors px-2"
-            >
-                ← Back to Projects
-            </a>
         </aside>
 
         <article
-            class="flex-1 min-w-0 prose prose-invert prose-mauve max-w-none"
+            class="flex-1 min-w-0 py-8 prose prose-invert prose-mauve max-w-none"
         >
             <div
                 class="bg-mantle/50 border border-surface0 p-8 md:p-12"

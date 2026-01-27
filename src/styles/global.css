@@ -44,18 +44,289 @@
     --foreground: var(--color-text);
 }
 
-body {
-    background-color: var(--color-base);
-    color: var(--color-text);
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
-    line-height: 1.5;
-    -webkit-font-smoothing: antialiased;
-}
-
 @layer base {
     * {
         border-color: var(--color-surface0);
     }
+
+    html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 5rem;
+        /* Accounts for sticky header */
+    }
+}
+
+/* Typography & Prose Refinements */
+.prose {
+    --tw-prose-body: var(--color-text);
+    --tw-prose-headings: var(--color-text);
+    --tw-prose-links: var(--color-mauve);
+    --tw-prose-bold: var(--color-text);
+    --tw-prose-counters: var(--color-overlay0);
+    --tw-prose-bullets: var(--color-surface1);
+    --tw-prose-hr: var(--color-surface0);
+    --tw-prose-quotes: var(--color-subtext0);
+    --tw-prose-quote-borders: var(--color-mauve);
+    --tw-prose-captions: var(--color-overlay0);
+    --tw-prose-code: var(--color-mauve);
+    --tw-prose-pre-code: var(--color-text);
+    --tw-prose-pre-bg: var(--color-crust);
+    --tw-prose-th-borders: var(--color-surface1);
+    --tw-prose-td-borders: var(--color-surface0);
+}
+
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6 {
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    margin-top: 2em;
+    margin-bottom: 0.5em;
+}
+
+.prose h1 {
+    font-size: 2.25rem;
+}
+
+.prose h2 {
+    font-size: 1.875rem;
+    border-bottom: 1px solid var(--color-surface0);
+    padding-bottom: 0.3em;
+}
+
+.prose h3 {
+    font-size: 1.5rem;
+}
+
+.prose a {
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+}
+
+.prose a:hover {
+    border-bottom-color: var(--color-mauve);
+}
+
+/* Anchor Links */
+.anchor-link {
+    opacity: 0;
+    margin-right: 0.5rem;
+    color: var(--color-mauve);
+    transition: opacity 0.2s;
+    text-decoration: none !important;
+    border: none !important;
+}
+
+.prose h1:hover .anchor-link,
+.prose h2:hover .anchor-link,
+.prose h3:hover .anchor-link,
+.prose h4:hover .anchor-link,
+.prose h5:hover .anchor-link,
+.prose h6:hover .anchor-link {
+    opacity: 0.5;
+}
+
+.anchor-link:hover {
+    opacity: 1 !important;
+}
+
+/* Lists and Spacing */
+.prose ul>li::marker {
+    color: var(--color-mauve);
+}
+
+.prose ol>li::marker {
+    color: var(--color-mauve);
+    font-weight: 700;
+}
+
+.prose li {
+    margin-top: 0.25em;
+    margin-bottom: 0.25em;
+}
+
+/* Blockquotes */
+.prose blockquote {
+    background-color: var(--color-mantle);
+    padding: 1.25rem 1.5rem;
+    border-radius: var(--radius-sm);
+    font-style: italic;
+    border-left-width: 4px;
+    position: relative;
+    overflow: hidden;
+}
+
+.prose blockquote p:first-of-type::before,
+.prose blockquote p:last-of-type::after {
+    content: none;
+}
+
+/* Tables (GFM) */
+.prose table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2rem 0;
+    font-size: 0.875rem;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    border: 1px solid var(--color-surface0);
+}
+
+.prose thead {
+    background-color: var(--color-mantle);
+    border-bottom: 2px solid var(--color-surface1);
+}
+
+.prose th {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-subtext1);
+}
+
+.prose td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--color-surface0);
+}
+
+.prose tr:last-child td {
+    border-bottom: none;
+}
+
+.prose tr:hover td {
+    background-color: var(--color-surface0);
+    opacity: 0.5;
+    transition: background-color 0.2s;
+}
+
+/* Checkboxes (GFM) */
+.prose input[type="checkbox"] {
+    appearance: none;
+    width: 1.2rem;
+    height: 1.2rem;
+    border: 2px solid var(--color-surface1);
+    border-radius: var(--radius-xs);
+    background-color: var(--color-mantle);
+    margin-right: 0.5rem;
+    cursor: pointer;
+    position: relative;
+    vertical-align: middle;
+    transition: all 0.2s;
+}
+
+.prose input[type="checkbox"]:checked {
+    background-color: var(--color-mauve);
+    border-color: var(--color-mauve);
+}
+
+.prose input[type="checkbox"]:checked::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--color-base);
+    font-size: 0.8rem;
+    font-weight: 900;
+}
+
+.prose li:has(input[type="checkbox"]) {
+    list-style-type: none;
+    padding-left: 0;
+    margin-left: -1.5rem;
+}
+
+/* Inline Code */
+.prose :not(pre)>code {
+    background-color: var(--color-surface0);
+    color: var(--color-mauve);
+    padding: 0.2em 0.4em;
+    border-radius: var(--radius-xs);
+    font-size: 0.85em;
+    font-weight: 500;
+}
+
+.prose :not(pre)>code::before,
+.prose :not(pre)>code::after {
+    content: none;
+}
+
+/* Rehype Pretty Code Refinements */
+pre {
+    margin: 2rem 0 !important;
+    border-radius: var(--radius-sm) !important;
+    border: 1px solid var(--color-surface0) !important;
+    background-color: var(--color-crust) !important;
+    position: relative;
+}
+
+/* Code Block Title */
+figcaption[data-rehype-pretty-code-title] {
+    background-color: var(--color-mantle);
+    border: 1px solid var(--color-surface0);
+    border-bottom: none;
+    padding: 0.5rem 1rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--color-subtext1);
+    font-family: 'JetBrains Mono', monospace;
+    display: inline-block;
+    border-top-left-radius: var(--radius-sm);
+    border-top-right-radius: var(--radius-sm);
+    margin-bottom: -2rem;
+    /* Pull code block up */
+    position: relative;
+    z-index: 10;
+}
+
+/* Line Highlighting */
+[data-highlighted-line] {
+    background-color: rgba(203, 166, 247, 0.1) !important;
+    border-left: 2px solid var(--color-mauve);
+}
+
+/* Char Highlighting */
+[data-highlighted-chars] {
+    background-color: rgba(203, 166, 247, 0.2) !important;
+    border-radius: var(--radius-xs);
+    box-shadow: 0 0 0 4px rgba(203, 166, 247, 0.1);
+}
+
+/* Copy Button Styling */
+.copy-code-button {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    padding: 0.4rem;
+    background-color: var(--color-surface0);
+    border-radius: var(--radius-xs);
+    color: var(--color-overlay0);
+    opacity: 0;
+    transition: all 0.2s;
+    cursor: pointer;
+    z-index: 20;
+}
+
+pre:hover .copy-code-button {
+    opacity: 1;
+}
+
+.copy-code-button:hover {
+    background-color: var(--color-surface1);
+    color: var(--color-text);
+}
+
+/* Strikethrough */
+.prose del {
+    color: var(--color-overlay0);
+    text-decoration-color: var(--color-red);
+    text-decoration-thickness: 2px;
 }
 
 /* Custom Selection */
