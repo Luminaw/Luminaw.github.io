@@ -1,0 +1,67 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Card from "../../components/common/Card.astro";
+import { getCollection } from "astro:content";
+
+const posts = await getCollection("blog", ({ data }) => !data.draft);
+const sortedPosts = posts.sort(
+    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+
+// Get unique tags
+const allTags = [
+    ...new Set(sortedPosts.flatMap((post) => post.data.tags || [])),
+];
+---
+
+<BaseLayout
+    title="Blog | Luminaw"
+    description="Deep dives into software engineering, design, and everything in between."
+>
+    <div class="space-y-12">
+        <header class="space-y-4">
+            <h1
+                class="text-4xl md:text-5xl font-black tracking-tight text-text"
+            >
+                Writing
+            </h1>
+            <p class="text-subtext1 text-xl max-w-2xl leading-relaxed">
+                Personal thoughts, technical tutorials, and reflections on
+                building software.
+            </p>
+        </header>
+
+        {
+            allTags.length > 0 && (
+                <div class="flex flex-wrap gap-2">
+                    {allTags.map((tag) => (
+                        <span
+                            class="px-3 py-1 bg-surface0 text-subtext1 text-xs font-bold uppercase tracking-widest"
+                            style="border-radius: var(--radius-xs);"
+                        >
+                            {tag}
+                        </span>
+                    ))}
+                </div>
+            )
+        }
+
+        <div class="grid gap-8">
+            {
+                sortedPosts.map((post) => (
+                    <Card
+                        title={post.data.title}
+                        description={post.data.description}
+                        href={`/blog/${post.id}`}
+                        date={post.data.pubDate.toLocaleDateString("en-US", {
+                            month: "long",
+                            day: "numeric",
+                            year: "numeric",
+                        })}
+                        tags={post.data.tags}
+                    />
+                ))
+            }
+        </div>
+    </div>
+</BaseLayout>

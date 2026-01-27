@@ -1,0 +1,43 @@
+---
+interface Props {
+    type?: "info" | "warning" | "danger" | "tip";
+    title?: string;
+}
+
+const { type = "info", title } = Astro.props;
+
+const icons = {
+    info: "󰋽",
+    warning: "",
+    danger: "",
+    tip: "󰌵",
+};
+
+const styles = {
+    info: "bg-blue/5 border-blue/20 text-blue",
+    warning: "bg-yellow/5 border-yellow/20 text-yellow",
+    danger: "bg-red/5 border-red/20 text-red",
+    tip: "bg-green/5 border-green/20 text-green",
+};
+---
+
+<div
+    class={`p-4 border my-6 ring-1 ring-inset ring-transparent ${styles[type]}`}
+    style="border-radius: var(--radius-sm);"
+>
+    <div class="flex gap-3">
+        <span class="text-xl leading-none">{icons[type]}</span>
+        <div class="flex-1">
+            {
+                title && (
+                    <h4 class="font-bold mb-1 text-sm uppercase tracking-wider">
+                        {title}
+                    </h4>
+                )
+            }
+            <div class="text-text/90 text-sm leading-relaxed prose-p:my-0">
+                <slot />
+            </div>
+        </div>
+    </div>
+</div>

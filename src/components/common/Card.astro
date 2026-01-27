@@ -1,0 +1,53 @@
+---
+interface Props {
+    title: string;
+    description?: string;
+    href: string;
+    date?: string;
+    tags?: string[];
+}
+
+const { title, description, href, date, tags } = Astro.props;
+---
+
+<a
+    href={href}
+    class="block p-5 bg-mantle border border-surface0 hover:border-mauve/50 transition-all group relative overflow-hidden ring-1 ring-inset ring-transparent hover:ring-mauve/20"
+    style="border-radius: var(--radius-sm);"
+>
+    <div class="flex flex-col h-full space-y-3">
+        {
+            date && (
+                <time class="text-xs font-medium text-overlay0 uppercase tracking-widest">
+                    {date}
+                </time>
+            )
+        }
+
+        <h3
+            class="text-lg font-bold text-text group-hover:text-mauve transition-colors"
+        >
+            {title}
+        </h3>
+
+        {
+            description && (
+                <p class="text-sm text-subtext0 line-clamp-2 leading-relaxed">
+                    {description}
+                </p>
+            )
+        }
+
+        {
+            tags && tags.length > 0 && (
+                <div class="flex flex-wrap gap-2 mt-auto pt-2">
+                    {tags.map((tag) => (
+                        <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 bg-surface0 text-subtext1 rounded-[2px]">
+                            {tag}
+                        </span>
+                    ))}
+                </div>
+            )
+        }
+    </div>
+</a>

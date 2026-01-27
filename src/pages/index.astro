@@ -1,11 +1,119 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Card from "../components/common/Card.astro";
+import { getCollection } from "astro:content";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const posts = await getCollection("blog", ({ data }) => !data.draft);
+const latestPosts = posts
+	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+	.slice(0, 3);
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<BaseLayout>
+	<section class="relative py-20 overflow-hidden">
+		<!-- Visual Blobs -->
+		<div
+			class="absolute -top-24 -left-24 w-96 h-96 bg-mauve/5 rounded-full blur-3xl animate-pulse"
+		>
+		</div>
+		<div
+			class="absolute top-1/2 -right-24 w-64 h-64 bg-blue/5 rounded-full blur-3xl animate-bounce"
+			style="animation-duration: 8s;"
+		>
+		</div>
+
+		<div class="relative z-10 space-y-8">
+			<div class="space-y-4">
+				<h1
+					class="text-5xl md:text-7xl font-bold tracking-tighter text-text leading-tight"
+				>
+					Crafting <span class="text-mauve">Digital</span><br />
+					Experiences.
+				</h1>
+				<p class="text-xl text-subtext1 max-w-xl leading-relaxed">
+					I'm a software engineer and designer focused on building
+					visually stunning and performant web applications. Welcome
+					to my personal space.
+				</p>
+			</div>
+
+			<div class="flex gap-4">
+				<a
+					href="/blog"
+					class="px-6 py-3 bg-mauve text-base font-bold transition-all hover:opacity-90 active:scale-95"
+					style="border-radius: var(--radius-sm);"
+				>
+					Read Blog
+				</a>
+				<a
+					href="/docs"
+					class="px-6 py-3 border border-surface0 text-text font-bold transition-all hover:bg-surface0 active:scale-95"
+					style="border-radius: var(--radius-sm);"
+				>
+					View Docs
+				</a>
+			</div>
+		</div>
+	</section>
+
+	<section class="py-20 space-y-10">
+		<div
+			class="flex items-end justify-between border-b border-surface0/50 pb-4"
+		>
+			<h2 class="text-3xl font-bold tracking-tight">Latest Thoughts</h2>
+			<a
+				href="/blog"
+				class="text-sm font-medium text-mauve hover:underline decoration-2 underline-offset-4"
+			>
+				View all posts →
+			</a>
+		</div>
+
+		<div class="grid gap-6 md:grid-cols-2">
+			{
+				latestPosts.map((post) => (
+					<Card
+						title={post.data.title}
+						description={post.data.description}
+						href={`/blog/${post.id}`}
+						date={post.data.pubDate.toLocaleDateString("en-US", {
+							month: "short",
+							day: "numeric",
+							year: "numeric",
+						})}
+						tags={post.data.tags}
+					/>
+				))
+			}
+		</div>
+	</section>
+
+	<section class="py-20 space-y-10">
+		<div
+			class="flex items-end justify-between border-b border-surface0/50 pb-4"
+		>
+			<h2 class="text-3xl font-bold tracking-tight">Projects</h2>
+		</div>
+
+		<div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+			<Card
+				title="Luminaw Theme"
+				description="A dark purple, Catppuccin-inspired design system for Astro."
+				href="#"
+				tags={["Astro", "Tailwind", "Design"]}
+			/>
+			<Card
+				title="Project X"
+				description="A classified project involving advanced AI and coffee."
+				href="#"
+				tags={["AI", "Next.js"]}
+			/>
+			<Card
+				title="Open Source"
+				description="Contributing to the future of the web, one PR at a time."
+				href="#"
+				tags={["GitHub", "OSS"]}
+			/>
+		</div>
+	</section>
+</BaseLayout>

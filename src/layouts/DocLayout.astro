@@ -1,0 +1,71 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import { getCollection } from "astro:content";
+
+const { title, entry } = Astro.props;
+const docs = await getCollection("docs");
+const sortedDocs = docs.sort(
+    (a, b) => a.data.sidebarOrder - b.data.sidebarOrder,
+);
+---
+
+<BaseLayout title={title}>
+    <div class="flex flex-col md:flex-row gap-12">
+        <aside class="w-full md:w-64 shrink-0 space-y-8">
+            <div>
+                <h5
+                    class="text-xs font-bold uppercase tracking-widest text-overlay0 mb-4 px-2"
+                >
+                    Documentation
+                </h5>
+                <nav>
+                    <ul class="space-y-1">
+                        {
+                            sortedDocs.map((doc) => (
+                                <li>
+                                    <a
+                                        href={`/docs/${doc.id}`}
+                                        class={`block px-3 py-2 text-sm transition-all border-l-2 ${
+                                            entry?.id === doc.id
+                                                ? "bg-mauve/5 text-mauve border-mauve font-bold"
+                                                : "text-subtext0 border-transparent hover:text-text hover:border-surface1"
+                                        }`}
+                                    >
+                                        {doc.data.title}
+                                    </a>
+                                </li>
+                            ))
+                        }
+                    </ul>
+                </nav>
+            </div>
+        </aside>
+
+        <article
+            class="flex-1 min-w-0 prose prose-invert prose-mauve max-w-none"
+        >
+            <div
+                class="bg-mantle/50 border border-surface0 p-8 md:p-12"
+                style="border-radius: var(--radius-sm);"
+            >
+                <h1 class="not-prose text-4xl font-black tracking-tight mb-8">
+                    {title}
+                </h1>
+                <slot />
+            </div>
+        </article>
+    </div>
+</BaseLayout>
+
+<style is:global>
+    .prose pre {
+        background-color: var(--color-crust) !important;
+        border: 1px solid var(--color-surface0);
+        border-radius: var(--radius-sm);
+        padding: 1.5rem;
+    }
+    .prose code {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.9em;
+    }
+</style>
