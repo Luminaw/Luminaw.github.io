@@ -4,10 +4,20 @@ import DocLayout from "../../layouts/DocLayout.astro";
 
 export async function getStaticPaths() {
     const docs = await getCollection("docs");
-    return docs.map((doc) => ({
-        params: { slug: doc.id },
-        props: { doc },
-    }));
+    return docs.map((doc) => {
+        // Remove extension
+        let cleanId = doc.id.replace(/\.mdx?$/, "");
+
+        // Map "project/index" to "project" slug
+        const slug = cleanId.endsWith("/index")
+            ? cleanId.replace("/index", "")
+            : cleanId;
+
+        return {
+            params: { slug },
+            props: { doc },
+        };
+    });
 }
 
 const { doc } = Astro.props;

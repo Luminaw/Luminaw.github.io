@@ -1,10 +1,55 @@
 ---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Card from "../../components/common/Card.astro";
 import { getCollection } from "astro:content";
 
+// Find all index.mdx files which represent the project roots
 const docs = await getCollection("docs");
-const firstDoc = docs.sort(
-    (a, b) => a.data.sidebarOrder - b.data.sidebarOrder,
-)[0];
+const projects = docs.filter((doc) => {
+    const cleanId = doc.id.replace(/\.mdx?$/, "");
+    return cleanId.endsWith("/index") || cleanId === "index";
+});
 
-return Astro.redirect(firstDoc ? `/docs/${firstDoc.id}` : "/");
+// Sort projects by their index file's sidebarOrder
+const sortedProjects = projects.sort(
+    (a, b) => a.data.sidebarOrder - b.data.sidebarOrder,
+);
 ---
+
+<BaseLayout
+    title="Docs | Luminaw"
+    description="Comprehensive documentation for my various projects and open-source work."
+>
+    <div class="space-y-12">
+        <header class="space-y-4">
+            <h1
+                class="text-4xl md:text-5xl font-black tracking-tight text-text"
+            >
+                Projects & Documentation
+            </h1>
+            <p class="text-subtext1 text-xl max-w-2xl leading-relaxed">
+                Explore deep dives, guides, and API references for my projects.
+            </p>
+        </header>
+
+        <div class="grid gap-8 md:grid-cols-2">
+            {
+                sortedProjects.map((project) => {
+                    const cleanId = project.id.replace(/\.mdx?$/, "");
+                    const projectId = cleanId.replace("/index", "");
+                    return (
+                        <Card
+                            title={project.data.title}
+                            description={
+                                project.data.description ||
+                                "No description provided."
+                            }
+                            href={`/docs/${projectId}`}
+                            tags={[projectId.toUpperCase()]}
+                        />
+                    );
+                })
+            }
+        </div>
+    </div>
+</BaseLayout>

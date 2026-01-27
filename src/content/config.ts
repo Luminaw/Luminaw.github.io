@@ -20,6 +20,7 @@ const docsCollection = defineCollection({
     type: 'content',
     schema: z.object({
         title: z.string(),
+        description: z.string().optional(),
         // Docs often need a 'sidebarOrder' to control navigation
         sidebarOrder: z.number().default(999),
     }),

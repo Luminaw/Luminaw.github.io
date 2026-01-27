@@ -3,10 +3,26 @@ import BaseLayout from "./BaseLayout.astro";
 import { getCollection } from "astro:content";
 
 const { title, entry } = Astro.props;
-const docs = await getCollection("docs");
-const sortedDocs = docs.sort(
-    (a, b) => a.data.sidebarOrder - b.data.sidebarOrder,
-);
+
+// entry.id in Astro 5 is the relative path from the content dir, e.g., "luminaw/index.mdx"
+const cleanEntryId = entry.id.replace(/\.mdx?$/, "");
+const projectRoot = cleanEntryId.split("/")[0];
+
+const allDocs = await getCollection("docs");
+
+// Filter docs that belong to the same project
+const projectDocs = allDocs
+    .filter((doc) => doc.id.startsWith(projectRoot))
+    .sort((a, b) => a.data.sidebarOrder - b.data.sidebarOrder);
+
+// Helper to format the link correctly
+const getDocLink = (id: string) => {
+    const cleanId = id.replace(/\.mdx?$/, "");
+    const finalId = cleanId.endsWith("/index")
+        ? cleanId.replace("/index", "")
+        : cleanId;
+    return `/docs/${finalId}`;
+};
 ---
 
 <BaseLayout title={title}>
@@ -16,15 +32,15 @@ const sortedDocs = docs.sort(
                 <h5
                     class="text-xs font-bold uppercase tracking-widest text-overlay0 mb-4 px-2"
                 >
-                    Documentation
+                    {projectRoot.charAt(0).toUpperCase() + projectRoot.slice(1)} Docs
                 </h5>
                 <nav>
                     <ul class="space-y-1">
                         {
-                            sortedDocs.map((doc) => (
+                            projectDocs.map((doc) => (
                                 <li>
                                     <a
-                                        href={`/docs/${doc.id}`}
+                                        href={getDocLink(doc.id)}
                                         class={`block px-3 py-2 text-sm transition-all border-l-2 ${
                                             entry?.id === doc.id
                                                 ? "bg-mauve/5 text-mauve border-mauve font-bold"
@@ -39,6 +55,13 @@ const sortedDocs = docs.sort(
                     </ul>
                 </nav>
             </div>
+
+            <a
+                href="/docs"
+                class="inline-flex items-center text-xs font-medium text-overlay0 hover:text-mauve transition-colors px-2"
+            >
+                ← Back to Projects
+            </a>
         </aside>
 
         <article
