@@ -48,19 +48,25 @@ const allTags = [
 
         <div class="grid gap-8">
             {
-                sortedPosts.map((post) => (
-                    <Card
-                        title={post.data.title}
-                        description={post.data.description}
-                        href={`/blog/${post.id}`}
-                        date={post.data.pubDate.toLocaleDateString("en-US", {
-                            month: "long",
-                            day: "numeric",
-                            year: "numeric",
-                        })}
-                        tags={post.data.tags}
-                    />
-                ))
+                sortedPosts.map((post) => {
+                    const postSlug = post.id.replace(/\.mdx?$/, "");
+                    return (
+                        <Card
+                            title={post.data.title}
+                            description={post.data.description}
+                            href={`/blog/${postSlug}`}
+                            date={post.data.pubDate.toLocaleDateString(
+                                "en-US",
+                                {
+                                    month: "long",
+                                    day: "numeric",
+                                    year: "numeric",
+                                },
+                            )}
+                            tags={post.data.tags}
+                        />
+                    );
+                })
             }
         </div>
     </div>
