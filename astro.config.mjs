@@ -38,7 +38,7 @@ export default defineConfig({
         [
           rehypeAutolinkHeadings,
           {
-            behavior: 'prepend', // Adds a link icon *after* the text
+            behavior: 'prepend', // Adds a link icon *before* the text
             properties: { className: ['anchor-link'] }, // CSS class for the icon
             content: { type: 'text', value: '# ' }, // The symbol to show
           },
