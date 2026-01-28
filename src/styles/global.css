@@ -386,9 +386,18 @@ pre:hover .copy-code-button {
 }
 
 /* Custom Selection */
-::selection {
-    background-color: var(--color-mauve);
-    color: var(--color-base);
+/* Blog Filtering */
+.tag-active {
+    background-color: var(--color-mauve) !important;
+    color: var(--color-base) !important;
+}
+
+.blog-card {
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+.blog-card-hidden {
+    display: none !important;
 }
 
 /* Pagefind UI Overrides */
