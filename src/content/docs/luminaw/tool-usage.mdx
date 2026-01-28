@@ -44,14 +44,22 @@ You can use custom components in your MDX files. For example, the `Callout` comp
 ###### Heading 6
 
 - item 1
+    - nested item 1
+            - nested nested item 1
 - item 2
+    - nested item 2
+        - nested nested item 2
 - item 3
 
 1. item 1
-2. item 2
+    1. nested item 1
+        1. nested nested item 1
+2. item 2   
+    1. nested item 2
+        1. nested nested item 2
 3. item 3
 
-```javascript
+```javascript title="src/index.js"
 function hello() {
     console.log("hello world");
 }
