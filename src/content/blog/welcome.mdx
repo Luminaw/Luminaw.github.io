@@ -1,0 +1,118 @@
+---
+title: "Hello World"
+description: "Welcoming you to my new personal blog and portfolio."
+pubDate: 2026-01-28
+tags: ["update", "hello"]
+---
+
+import Callout from "../../components/mdx/Callout.astro";
+
+### Why I made this blog
+
+I made this blog to share my thoughts, ideas, some tutorials, and overall just to get better at technical writing.
+
+### About this blog
+
+This blog is made with Astro and Tailwind CSS. I also decided on using MDX for writing my blog posts. I'm not a big fan of writing blog posts, but I think it's a good way to share my knowledge with the world.
+
+#### Tech Stack
+
+- [Astro](https://astro.build/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [MDX](https://mdxjs.com/)
+- [Pagefind](https://pagefind.io/)
+- [Sitemap](https://astro.build/integrations/astro-sitemap/)
+
+#### A few cool features
+
+- Bullet points are nice
+
+```ts
+const x = 1; // code blocks are nice
+```
+
+```rust title="main.rs" {3} {"words"}
+fn main() {
+    println!("Hello, world!");
+    // especially when I can highlight things too
+    // even specific words
+}
+```
+
+- bullet points are nice
+    - nested bullet points make it even better
+        - especially when they line up
+
+1. Numbered lists are nice
+    1. When we can organize them more
+        1. And even more than that!
+
+- [ ] We can even make a todo list.
+- [x] And sometimes we get it done!
+
+> Blockquotes are nice too. - someone
+
+| Tables | Are | Nice |
+| --- | --- | --- |
+| Tables | Are | Nice |
+
+I can even ~~cross~~ things out.
+
+Or bold **this**.
+
+links look pretty too [like this](https://astro.build/).
+
+Or I can even send you to another page with a [link](/blog/).
+
+Or just to another heading on this page with a [link](#about-this-blog).
+
+The other cool thing I can do is embed code into my blog posts, like this:
+
+<div class="p-6 border rounded-xl bg-zinc-50 dark:bg-zinc-900 flex flex-col items-center gap-4 my-4">
+  <div class="flex flex-col items-center">
+    <span class="text-xs font-bold uppercase tracking-widest text-zinc-500">Counter</span>
+    <span id="counter" class="text-5xl font-bold font-mono tabular-nums">0</span>
+  </div>
+  <div class="flex gap-2">
+    <button 
+      class="px-4 py-2 bg-zinc-200 dark:bg-zinc-800 rounded-lg hover:bg-zinc-300 dark:hover:bg-zinc-700 transition-colors"
+      onclick="document.getElementById('counter').textContent--"
+    >
+      Decrement
+    </button>
+    <button 
+      class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors shadow-md shadow-blue-500/20"
+      onclick="document.getElementById('counter').textContent++"
+    >
+      Increment
+    </button>
+  </div>
+</div>
+
+or even animate something:
+
+<div class="p-6 border rounded-xl bg-zinc-50 dark:bg-zinc-900 flex flex-col items-center justify-center gap-8 my-4 h-64">
+  <div 
+    class="w-16 h-16 bg-blue-600 rounded-full cursor-pointer shadow-xl shadow-blue-500/20"
+    onclick="this.animate([
+      { transform: 'translateY(0) scale(1)' },
+      { transform: 'translateY(80px) scale(1.2, 0.8)', offset: 0.5 },
+      { transform: 'translateY(0) scale(1)' }
+    ], {
+      duration: 600,
+      easing: 'cubic-bezier(0.42, 0, 0.58, 1)'
+    })"
+  ></div>
+  <span class="text-xs font-bold uppercase tracking-widest text-zinc-500">Click the ball to bounce</span>
+</div>
+
+or even make a component:
+
+<Callout type="info" title="Pro Tip">
+  Use the `mauve` text color for emphasizing important keywords in your docs.
+</Callout>
+
+
+### What to expect
+
+I'll be posing more about projects I am working on, tutorials, and overall just get better at technical writing skills. I give no promises on the frequency of posts, but I'll try my best to keep it up to date.
