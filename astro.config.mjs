@@ -50,7 +50,7 @@ export default defineConfig({
           {
             theme: 'catppuccin-mocha',
             keepBackground: true,
-            // @ts-ignore
+            // @ts-expect-error ignore type of any for `node`
             onVisitLine(node) {
               if (node.children.length === 0) {
                 node.children = [{ type: 'text', value: ' ' }];
