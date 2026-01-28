@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
 import { getCollection } from "astro:content";
+import Search from "astro-pagefind/components/Search";
 
 const { title, entry } = Astro.props;
 
@@ -42,6 +43,20 @@ const getDocLink = (id: string) => {
             >
                 ← Back to Projects
             </a>
+
+            <!-- Search Integration -->
+            <div class="px-3 pb-4 border-b border-surface0/50 relative">
+                <Search
+                    id="search"
+                    className="pagefind-ui"
+                    uiOptions={{
+                        showImages: false,
+                        translations: {
+                            placeholder: "Search docs...",
+                        },
+                    }}
+                />
+            </div>
 
             <div>
                 <h5

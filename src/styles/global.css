@@ -365,6 +365,170 @@ pre:hover .copy-code-button {
     color: var(--color-base);
 }
 
+/* Pagefind UI Overrides */
+.pagefind-ui {
+    --pagefind-ui-primary: var(--color-mauve);
+    --pagefind-ui-text: var(--color-text);
+    --pagefind-ui-background: var(--color-mantle);
+    --pagefind-ui-border: var(--color-surface0);
+    --pagefind-ui-tag: var(--color-surface1);
+    --pagefind-ui-border-width: 1px;
+    --pagefind-ui-border-radius: var(--radius-sm);
+    --pagefind-ui-font: inherit;
+    width: 100%;
+}
+
+/* Base search bar */
+.pagefind-ui .pagefind-ui__search-input {
+    background-color: var(--color-crust) !important;
+    color: var(--color-text) !important;
+    font-weight: 500 !important;
+    border: 1px solid var(--color-surface0) !important;
+    transition: all 0.2s !important;
+    font-size: 0.875rem !important;
+    padding: 0.5rem 3.5rem 0.5rem 2.25rem !important;
+    /* Extra right padding for clear button */
+    height: auto !important;
+    width: 100% !important;
+}
+
+.pagefind-ui .pagefind-ui__search-input:focus {
+    border-color: var(--color-mauve) !important;
+    outline: none !important;
+    box-shadow: 0 0 0 2px rgba(203, 166, 247, 0.1) !important;
+}
+
+/* Integrated Search Icon */
+.pagefind-ui .pagefind-ui__search-input::before {
+    content: "";
+    position: absolute;
+    left: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1rem;
+    height: 1rem;
+    background-color: var(--color-overlay0);
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z'%3E%3C/path%3E%3C/svg%3E");
+    mask-repeat: no-repeat;
+    mask-size: contain;
+    z-index: 10;
+}
+
+/* Themed Clear Button (Integrated as a pill) */
+.pagefind-ui .pagefind-ui__search-clear {
+    background-color: var(--color-overlay3) !important;
+    padding: 0.15rem 0.5rem !important;
+    width: auto !important;
+    height: auto !important;
+    border-radius: var(--radius-xs) !important;
+    position: absolute !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    right: 0.4rem !important;
+    color: var(--color-subtext1) !important;
+    font-size: 0.6rem !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    border: 1px solid var(--color-overlay3) !important;
+    margin: 0 !important;
+    cursor: pointer !important;
+}
+
+.pagefind-ui .pagefind-ui__search-clear:hover {
+    background-color: var(--color-red) !important;
+    color: var(--color-base) !important;
+    border-color: var(--color-red) !important;
+}
+
+/* Results Drawer */
+.pagefind-ui .pagefind-ui__drawer {
+    position: absolute !important;
+    top: 110% !important;
+    left: 0 !important;
+    right: 0 !important;
+    background-color: var(--color-mantle) !important;
+    border: 1px solid var(--color-surface0) !important;
+    border-radius: var(--radius-sm) !important;
+    box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7) !important;
+    backdrop-filter: blur(16px) !important;
+    max-height: 450px !important;
+    overflow-y: auto !important;
+    padding: 0.5rem !important;
+    z-index: 1000 !important;
+}
+
+/* Visibility logic */
+.pagefind-ui .pagefind-ui__drawer:empty {
+    display: none !important;
+}
+
+.pagefind-ui .pagefind-ui__results-area {
+    margin-top: 0;
+    display: block !important;
+}
+
+.pagefind-ui .pagefind-ui__result {
+    list-style: none !important;
+    padding: 2px !important;
+    margin: 0 !important;
+    border: none !important;
+}
+
+.pagefind-ui .pagefind-ui__result-link {
+    display: block !important;
+    padding: 0.75rem 1rem !important;
+    color: var(--color-text) !important;
+    font-weight: 700 !important;
+    font-size: 0.9rem !important;
+    text-decoration: none !important;
+    transition: all 0.2s !important;
+    border-radius: var(--radius-xs) !important;
+}
+
+.pagefind-ui .pagefind-ui__result:hover .pagefind-ui__result-link {
+    background-color: var(--color-mauve) !important;
+    color: var(--color-base) !important;
+}
+
+.pagefind-ui .pagefind-ui__result-excerpt {
+    padding: 0 1rem 0.75rem !important;
+    font-size: 0.75rem !important;
+    color: var(--color-subtext1) !important;
+    line-height: 1.5 !important;
+}
+
+.pagefind-ui .pagefind-ui__result:hover .pagefind-ui__result-excerpt {
+    color: var(--color-text) !important;
+    font-weight: 400 !important;
+
+    mark {
+        background-color: rgba(203, 166, 247, 0.25) !important;
+        color: var(--color-mauve) !important;
+    }
+}
+
+.pagefind-ui .pagefind-ui__result mark {
+    background-color: rgba(203, 166, 247, 0.25) !important;
+    color: var(--color-mauve) !important;
+    font-weight: 800 !important;
+    border-radius: 2px !important;
+    padding: 0 2px !important;
+}
+
+.pagefind-ui .pagefind-ui__result:hover mark {
+    background-color: rgba(255, 255, 255, 0.4) !important;
+    color: var(--color-base) !important;
+}
+
+.pagefind-ui .pagefind-ui__message {
+    padding: 1rem !important;
+    font-size: 0.7rem !important;
+    color: var(--color-overlay0) !important;
+    font-weight: 800 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.15em !important;
+}
+
 /* Minimal Scrollbar */
 ::-webkit-scrollbar {
     width: 8px;
