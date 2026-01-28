@@ -10,7 +10,7 @@ const { post } = Astro.props;
 const { title, description, pubDate, tags } = post.data;
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout title={title} description={description} type="article">
     <article class="prose prose-invert prose-mauve max-w-none">
         <header class="not-prose mb-12 space-y-4">
             <div

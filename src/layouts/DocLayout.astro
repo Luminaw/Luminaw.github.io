@@ -25,7 +25,13 @@ const getDocLink = (id: string) => {
 };
 ---
 
-<BaseLayout title={title} container={false}>
+<BaseLayout
+    title={`${title} | Luminaw Documentation`}
+    description={entry.data.description ||
+        `Technical documentation for ${projectRoot} on Luminaw. Engineering guides and system specifications.`}
+    type="article"
+    container={false}
+>
     <div
         class="flex flex-col lg:flex-row gap-12 max-w-7xl mx-auto px-4 lg:px-8"
     >

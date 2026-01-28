@@ -6,6 +6,7 @@ import mdx from '@astrojs/mdx';
 import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
 import autoImport from 'astro-auto-import';
+import pagefind from 'astro-pagefind';
 
 import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
@@ -15,12 +16,14 @@ import rehypePrettyCode from 'rehype-pretty-code';
 
 // https://astro.build/config
 export default defineConfig({
+  site: 'https://luminaw.xyz',
   integrations: [
     autoImport({
       imports: [
         './src/components/mdx/Callout.astro',
       ],
     }),
+    pagefind(),
     react(),
     mdx({
       syntaxHighlight: false,
