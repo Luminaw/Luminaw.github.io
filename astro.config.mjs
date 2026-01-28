@@ -1,4 +1,3 @@
-// @ts-check
 import { defineConfig } from 'astro/config';
 
 import react from '@astrojs/react';
@@ -51,6 +50,7 @@ export default defineConfig({
           {
             theme: 'catppuccin-mocha',
             keepBackground: true,
+            // @ts-ignore
             onVisitLine(node) {
               if (node.children.length === 0) {
                 node.children = [{ type: 'text', value: ' ' }];
