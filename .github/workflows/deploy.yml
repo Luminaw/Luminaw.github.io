@@ -17,31 +17,22 @@ jobs:
       - name: Checkout your repository
         uses: actions/checkout@v4
 
-      # 1. Setup Node with built-in Caching
-      # This step automatically handles saving/restoring the cache
-      # based on your lockfile (package-lock.json or pnpm-lock.yaml)
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: 'npm' # CHANGE THIS to 'pnpm' or 'yarn' if you use those!
+          cache: 'pnpm'
 
-      # 2. Install dependencies
-      # 'npm ci' is faster/cleaner for CI than 'npm install'
       - name: Install dependencies
-        run: npm ci
-        # If using pnpm, use: pnpm install --frozen-lockfile
+        run: pnpm install --frozen-lockfile
 
-      # 3. Build the site
       - name: Build Astro
-        run: npm run build
-        # If using pnpm, use: pnpm run build
+        run: pnpm run build
 
-      # 4. Upload the build artifact (Previously handled by withastro/action)
       - name: Upload Pages Artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./dist # Ensure this matches your Astro output folder (usually 'dist')
+          path: ./dist
 
   deploy:
     needs: build
